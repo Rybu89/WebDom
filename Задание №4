@@ -1,0 +1,15 @@
+Задание 4:
+
+1 вариант
+SELECT Name as "Имя сотрудника", SUM(payments) as "Общая выплаченная сумма"
+FROM (
+      SELECT Name, COALESCE(Amount, 0) as payments
+      FROM SOTR LEFT JOIN PAYMENTS ON SOTR.Name = PAYMENTS.Name
+      ) as payment_to_staffe
+GROUP BY Name
+
+2 вариант
+SELECT s.Name as "Имя сотрудника", SUM(COALESCE(p.Amount, 0)) as "Общая выплаченная сумма"
+FROM SOTR s LEFT JOIN PAYMENTS p ON s.Name = p.Name
+GROUP BY Name
+  
